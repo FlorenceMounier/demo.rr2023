@@ -1,0 +1,13 @@
+flat_nettoyage.Rmd:
+  path: dev/flat_nettoyage.Rmd
+  state: active
+  R: R/clean_titles.R
+  tests: tests/testthat/test-clean_titles.R
+  vignettes: vignettes/nettoyage-donnees.Rmd
+  inflate:
+    flat_file: dev/flat_nettoyage.Rmd
+    vignette_name: Nettoyage données
+    open_vignette: true
+    check: true
+    document: true
+    overwrite: ask

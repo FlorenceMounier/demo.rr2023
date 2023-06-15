@@ -1,0 +1,35 @@
+---
+title: "Development actions history"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+All commands that you use to use when developing packages...
+
+# First time just after creating the project
+
+- Fill the following chunk to create the DESCRIPTION of your package
+
+```{r description, eval=FALSE}
+# Describe your package
+fusen::fill_description(
+  pkg = here::here(),
+  fields = list(
+    Title = "Demo RR2023",
+    Description = "Démonstration de création de package R documenté, testé, versionné et intégré en quelques minutes ? Challenge accepted !",
+    `Authors@R` = c(
+      person("Florence", "Mounier", email = "florence@thinkr.fr", role = c("aut", "cre"))
+    )
+  )
+)
+# Define License with use_*_license()
+usethis::use_mit_license("Florence Mounier")
+```
+
+# Start using git and share the package and its documentation on GitHub
+```{r}
+# usethis::create_github_token()
+# gitcreds::gitcreds_set()
+fusen::init_share_on_github()
+```

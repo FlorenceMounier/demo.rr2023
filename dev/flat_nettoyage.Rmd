@@ -1,0 +1,63 @@
+---
+title: "Nettoyage données"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r development, include=FALSE}
+library(testthat)
+```
+
+```{r development-load}
+# Load already included functions if relevant
+pkgload::load_all(export_all = FALSE)
+```
+
+# Etape 1 : nettoyage des noms de colonnes
+
+Convertir les noms de colonnes des dataframes en snake case.
+
+```{r function-clean_titles}
+#' Clean up column names in a dataframe
+#' 
+#' Converts dataframe column names to snake case.
+#' 
+#' @param data A dataframe
+#'
+#' @return A dataframe with cleaned up column names, in snake case.
+#' 
+#' @importFrom magrittr %>%
+#' @importFrom stringr str_squish str_to_lower str_replace_all
+#' 
+#' @examples
+#' 
+#' @export
+clean_titles <- function(data){
+    names(data) <- names(data) %>% 
+      # enlever espaces début, fin ou répétés
+      str_squish() %>% 
+      # minuscules
+      str_to_lower() %>% 
+      # remplacer les ponctuations par des underscores
+      str_replace_all(pattern = "[:punct:]|[:space:]", replacement = "_")
+    return(data)
+}
+```
+  
+```{r example-clean_titles}
+clean_titles(data = iris)
+```
+  
+```{r tests-clean_titles}
+test_that("clean_titles works", {
+  expect_true(inherits(clean_titles, "function")) 
+})
+```
+  
+
+```{r development-inflate, eval=FALSE}
+# Run but keep eval=FALSE to avoid infinite loop
+# Execute in the console directly
+fusen::inflate(flat_file = "dev/flat_nettoyage.Rmd", vignette_name = "Nettoyage données")
+```
